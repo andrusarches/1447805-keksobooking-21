@@ -15,10 +15,10 @@ var PHOTOS = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.g
 let mainMapPin = document.querySelector('.map__pin--main');
 let newAdForm = document.querySelector('.ad-form');
 let newAddressField = newAdForm.querySelector('#address');
-let mainMapPinInactiveXPosition = parseInt(mainMapPin.style.left) + 32;
-let mainMapPinInactiveYPosition = parseInt(mainMapPin.style.top) + 32;
-let mainMapPinActiveXPosition = parseInt(mainMapPin.style.left) + 32;
-let mainMapPinActiveYPosition = parseInt(mainMapPin.style.top) + 65;
+let mainMapPinInactiveXPosition = parseInt(mainMapPin.style.left, 10) + 32;
+let mainMapPinInactiveYPosition = parseInt(mainMapPin.style.top, 10) + 32;
+let mainMapPinActiveXPosition = parseInt(mainMapPin.style.left, 10) + 32;
+let mainMapPinActiveYPosition = parseInt(mainMapPin.style.top, 10) + 65;
 let newPriceField = newAdForm.querySelector('#price');
 let newHousingTypeField = newAdForm.querySelector('#type');
 let newCheckInField = newAdForm.querySelector('#timein');
@@ -221,15 +221,15 @@ let matchRoomNumberWithCapacity = function () {
 newRoomNumberField.addEventListener('change', matchRoomNumberWithCapacity);
 
 let checkCheckInAndCheckOut = function () {
-  if (parseInt(newCheckInField.value) === 12) {
+  if (parseInt(newCheckInField.value, 10) === 12) {
     newCheckOutField.querySelector('#timeout12').disabled = false;
     newCheckOutField.querySelector('#timeout13').disabled = true;
     newCheckOutField.querySelector('#timeout14').disabled = true;
-  } else if (parseInt(newCheckInField.value) === 13) {
+  } else if (parseInt(newCheckInField.value, 10) === 13) {
     newCheckOutField.querySelector('#timeout12').disabled = false;
     newCheckOutField.querySelector('#timeout13').disabled = false;
     newCheckOutField.querySelector('#timeout14').disabled = true;
-  } else if (parseInt(newCheckInField.value) === 14) {
+  } else if (parseInt(newCheckInField.value, 10) === 14) {
     newCheckOutField.querySelector('#timeout12').disabled = false;
     newCheckOutField.querySelector('#timeout13').disabled = false;
     newCheckOutField.querySelector('#timeout14').disabled = false;
