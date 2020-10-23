@@ -255,6 +255,7 @@ let activatePage = function () {
   enableMapFilters();
   enableNewAdForm();
   fillOutAddressActive();
+  matchRoomNumberWithCapacity();
 };
 
 deactivatePage();
