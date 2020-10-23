@@ -196,29 +196,33 @@ newHousingTypeField.addEventListener('input', matchPriceRangeWithHousingType);
 
 let matchRoomNumberWithCapacity = function () {
   if (newRoomNumberField.value === '1') {
-    newCapacityField.querySelector('#capacity3').disabled = true;
-    newCapacityField.querySelector('#capacity2').disabled = true;
-    newCapacityField.querySelector('#capacity1').disabled = false;
-    newCapacityField.querySelector('#capacity0').disabled = true;
+    if (newCapacityField.value === '1') {
+      newCapacityField.setCustomValidity('');
+    } else {
+      newCapacityField.setCustomValidity('В однокомнатном помещении может расположиться один гость.');
+    }
   } else if (newRoomNumberField.value === '2') {
-    newCapacityField.querySelector('#capacity3').disabled = true;
-    newCapacityField.querySelector('#capacity2').disabled = false;
-    newCapacityField.querySelector('#capacity1').disabled = false;
-    newCapacityField.querySelector('#capacity0').disabled = true;
+    if (newCapacityField.value === '1' || newCapacityField.value === '2') {
+      newCapacityField.setCustomValidity('');
+    } else {
+      newCapacityField.setCustomValidity('Двухкомнатное помещение доступно для 1-го или 2-ух гостей.');
+    }
   } else if (newRoomNumberField.value === '3') {
-    newCapacityField.querySelector('#capacity3').disabled = false;
-    newCapacityField.querySelector('#capacity2').disabled = false;
-    newCapacityField.querySelector('#capacity1').disabled = false;
-    newCapacityField.querySelector('#capacity0').disabled = true;
+    if (newCapacityField.value === '1' || newCapacityField.value === '2' || newCapacityField.value === '3') {
+      newCapacityField.setCustomValidity('');
+    } else {
+      newCapacityField.setCustomValidity('Трёхкомнатное помещение доступно для 1-го, 2-ух или 3-ёх гостей.');
+    }
   } else if (newRoomNumberField.value === '100') {
-    newCapacityField.querySelector('#capacity3').disabled = true;
-    newCapacityField.querySelector('#capacity2').disabled = true;
-    newCapacityField.querySelector('#capacity1').disabled = true;
-    newCapacityField.querySelector('#capacity0').disabled = false;
+    if (newCapacityField.value === '0') {
+      newCapacityField.setCustomValidity('');
+    } else {
+      newCapacityField.setCustomValidity('Дворец - не для гостей!');
+    }
   }
 };
 
-newRoomNumberField.addEventListener('change', matchRoomNumberWithCapacity);
+newAdForm.addEventListener('change', matchRoomNumberWithCapacity);
 
 let checkCheckInAndCheckOut = function () {
   if (parseInt(newCheckInField.value, 10) === 12) {
