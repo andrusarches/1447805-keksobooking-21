@@ -12,6 +12,19 @@ var CHECKOUT = ['12:00', '13.00', '14.00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var DESCRIPTIONS = ['Отличное место!', 'Замечательный вид из окна!', 'Хорошее место! ', 'Отличные условия!', 'Удобное расположение!', 'Просторно и удобно', 'Все необходимые удобства!', 'Рукой подать до главных достопримечательностей!'];
 var PHOTOS = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
+let mainMapPin = document.querySelector('.map__pin--main');
+let newAdForm = document.querySelector('.ad-form');
+let newAddressField = newAdForm.querySelector('#address');
+let mainMapPinInactiveXPosition = parseInt(mainMapPin.style.left, 10) + 32;
+let mainMapPinInactiveYPosition = parseInt(mainMapPin.style.top, 10) + 32;
+let mainMapPinActiveXPosition = parseInt(mainMapPin.style.left, 10) + 32;
+let mainMapPinActiveYPosition = parseInt(mainMapPin.style.top, 10) + 65;
+let newPriceField = newAdForm.querySelector('#price');
+let newHousingTypeField = newAdForm.querySelector('#type');
+let newCheckInField = newAdForm.querySelector('#timein');
+let newCheckOutField = newAdForm.querySelector('#timeout');
+let newRoomNumberField = newAdForm.querySelector('#room_number');
+let newCapacityField = newAdForm.querySelector('#capacity');
 
 var generateRandomArrayItemNumber = function (array) {
   return Math.floor(Math.random() * array.length);
@@ -112,11 +125,156 @@ var renderPin = function (arrayElement) {
 };
 
 var map = document.querySelector('.map');
-map.classList.remove('map--faded');
+
+let showMap = function () {
+  map.classList.remove('map--faded');
+};
+
+let fadeMap = function () {
+  map.classList.add('map--faded');
+};
+
+let newAdFieldsets = document.querySelectorAll('.ad-form-header, .ad-form__element');
+
+let disableNewAdForm = function () {
+  for (let i = 0; i < newAdFieldsets.length; i++) {
+    newAdFieldsets[i].disabled = true;
+  }
+  newAdForm.classList.add('ad-form--disabled');
+};
+
+let enableNewAdForm = function () {
+  for (let i = 0; i < newAdFieldsets.length; i++) {
+    newAdFieldsets[i].disabled = false;
+  }
+  newAdForm.classList.remove('ad-form--disabled');
+};
+
+let mapFilters = document.querySelectorAll('.map__filter, .map__features');
+
+let disableMapFilters = function () {
+  for (let i = 0; i < mapFilters.length; i++) {
+    mapFilters[i].disabled = true;
+  }
+};
+
+let enableMapFilters = function () {
+  for (let i = 0; i < mapFilters.length; i++) {
+    mapFilters[i].disabled = false;
+  }
+};
+
+let lockNewAddressField = function () {
+  newAddressField.disabled = true;
+};
+
+let fillOutAddressInactive = function () {
+  newAddressField.value = mainMapPinInactiveXPosition + ', ' + mainMapPinInactiveYPosition;
+};
+
+let fillOutAddressActive = function () {
+  newAddressField.value = mainMapPinActiveXPosition + ', ' + mainMapPinActiveYPosition;
+};
+
+let matchPriceRangeWithHousingType = function () {
+  if (newHousingTypeField.value === 'bungalow') {
+    newPriceField.min = 0;
+    newPriceField.placeholder = '0';
+  } else if (newHousingTypeField.value === 'flat') {
+    newPriceField.min = 1000;
+    newPriceField.placeholder = '1000';
+  } else if (newHousingTypeField.value === 'house') {
+    newPriceField.min = 5000;
+    newPriceField.placeholder = '5000';
+  } else if (newHousingTypeField.value === 'palace') {
+    newPriceField.min = 10000;
+    newPriceField.placeholder = '10000';
+  }
+};
+
+newHousingTypeField.addEventListener('input', matchPriceRangeWithHousingType);
+
+let matchRoomNumberWithCapacity = function () {
+  if (newRoomNumberField.value === '1') {
+    if (newCapacityField.value === '1') {
+      newCapacityField.setCustomValidity('');
+    } else {
+      newCapacityField.setCustomValidity('В однокомнатном помещении может расположиться один гость.');
+    }
+  } else if (newRoomNumberField.value === '2') {
+    if (newCapacityField.value === '1' || newCapacityField.value === '2') {
+      newCapacityField.setCustomValidity('');
+    } else {
+      newCapacityField.setCustomValidity('Двухкомнатное помещение доступно для 1-го или 2-ух гостей.');
+    }
+  } else if (newRoomNumberField.value === '3') {
+    if (newCapacityField.value === '1' || newCapacityField.value === '2' || newCapacityField.value === '3') {
+      newCapacityField.setCustomValidity('');
+    } else {
+      newCapacityField.setCustomValidity('Трёхкомнатное помещение доступно для 1-го, 2-ух или 3-ёх гостей.');
+    }
+  } else if (newRoomNumberField.value === '100') {
+    if (newCapacityField.value === '0') {
+      newCapacityField.setCustomValidity('');
+    } else {
+      newCapacityField.setCustomValidity('Дворец - не для гостей!');
+    }
+  }
+};
+
+newAdForm.addEventListener('change', matchRoomNumberWithCapacity);
+
+let checkCheckInAndCheckOut = function () {
+  if (parseInt(newCheckInField.value, 10) === 12) {
+    newCheckOutField.querySelector('#timeout12').disabled = false;
+    newCheckOutField.querySelector('#timeout13').disabled = true;
+    newCheckOutField.querySelector('#timeout14').disabled = true;
+  } else if (parseInt(newCheckInField.value, 10) === 13) {
+    newCheckOutField.querySelector('#timeout12').disabled = false;
+    newCheckOutField.querySelector('#timeout13').disabled = false;
+    newCheckOutField.querySelector('#timeout14').disabled = true;
+  } else if (parseInt(newCheckInField.value, 10) === 14) {
+    newCheckOutField.querySelector('#timeout12').disabled = false;
+    newCheckOutField.querySelector('#timeout13').disabled = false;
+    newCheckOutField.querySelector('#timeout14').disabled = false;
+  }
+};
+
+newCheckInField.addEventListener('change', checkCheckInAndCheckOut);
+
+let deactivatePage = function () {
+  fadeMap();
+  disableMapFilters();
+  disableNewAdForm();
+  fillOutAddressInactive();
+  lockNewAddressField();
+};
+
+let activatePage = function () {
+  showMap();
+  enableMapFilters();
+  enableNewAdForm();
+  fillOutAddressActive();
+  matchRoomNumberWithCapacity();
+};
+
+deactivatePage();
+
+mainMapPin.addEventListener('mousedown', function (evt) {
+  if (evt.button === 0 && map.classList.contains('map--faded')) {
+    activatePage();
+  }
+});
+
+mainMapPin.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    activatePage();
+  }
+});
 
 var fragment = document.createDocumentFragment();
 
-for (var i = 0; i < 8; i++) {
+for (let i = 0; i < 8; i++) {
   fragment.appendChild(renderPin(randomizedAds[i]));
 }
 
