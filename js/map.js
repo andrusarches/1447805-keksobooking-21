@@ -39,10 +39,12 @@
     return mapPin;
   };
 
-  var renderRandomAdPins = function () {
+  var renderAdPins = function (adData) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < 8; i++) {
-      fragment.appendChild(renderPin(window.randomizedAds[i]));
+    for (var i = 0; i < adData.length; i++) {
+      if (adData[i].offer) {
+        fragment.appendChild(renderPin(adData[i]));
+      }
     }
     mapPins.appendChild(fragment);
   };
@@ -54,6 +56,6 @@
     showMap: showMap,
     disableMapFilters: disableMapFilters,
     enableMapFilters: enableMapFilters,
-    renderRandomAdPins: renderRandomAdPins
+    renderAdPins: renderAdPins
   };
 })();

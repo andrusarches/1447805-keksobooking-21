@@ -75,3 +75,11 @@
 
   generateRandomAds();
 })();
+
+// var renderRandomAdPins = function () {
+//   var fragment = document.createDocumentFragment();
+//   for (var i = 0; i < 8; i++) {
+//     fragment.appendChild(renderPin(window.randomizedAds[i]));
+//   }
+//   mapPins.appendChild(fragment);
+// };
