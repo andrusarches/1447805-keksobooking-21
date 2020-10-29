@@ -2,7 +2,7 @@
 
 (function loadAdData() {
   var url = 'https://21.javascript.pages.academy/keksobooking/data';
-  var TIMEOUT_IN_MS = 1;
+  var TIMEOUT_IN_MS = 10000;
 
   window.load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
@@ -14,6 +14,7 @@
       switch (xhr.status) {
         case 200:
           onSuccess(xhr.response);
+          window.load.data = xhr.response;
           break;
         case 400:
           error = 'Неверный запрос';

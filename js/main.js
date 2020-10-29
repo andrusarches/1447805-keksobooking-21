@@ -8,7 +8,6 @@
     node.style.left = 0;
     node.style.right = 0;
     node.style.fontSize = '25px';
-
     node.textContent = '× ' + errorMessage + ' ×';
     document.body.insertAdjacentElement('afterbegin', node);
   };
@@ -33,7 +32,7 @@
   deactivatePage();
 
   window.map.mainMapPin.addEventListener('mousedown', function (evt) {
-    if (evt.button === 0 && window.map.map.classList.contains('map--faded')) {
+    if (evt.button === 0 && window.map.mapElement.classList.contains('map--faded')) {
       activatePage();
     }
   });
