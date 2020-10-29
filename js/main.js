@@ -31,15 +31,25 @@
 
   deactivatePage();
 
-  window.map.mainMapPin.addEventListener('mousedown', function (evt) {
+  var onClickMainPinActivate = function (evt) {
+    evt.preventDefault();
     if (evt.button === 0 && window.map.mapElement.classList.contains('map--faded')) {
       activatePage();
+      window.removeEventListener('keydown', onPressEnterActivate);
+      window.map.mainMapPin.removeEventListener('mousedown', onClickMainPinActivate);
     }
-  });
+  };
 
-  window.map.mainMapPin.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 13) {
+  var onPressEnterActivate = function (evt) {
+    evt.preventDefault();
+    if (evt.keyCode === 13 && window.map.mapElement.classList.contains('map--faded')) {
       activatePage();
+      window.removeEventListener('keydown', onPressEnterActivate);
+      window.map.mainMapPin.removeEventListener('mousedown', onClickMainPinActivate);
     }
-  });
+  };
+
+  window.map.mainMapPin.addEventListener('mousedown', onClickMainPinActivate);
+
+  window.addEventListener('keydown', onPressEnterActivate);
 })();
