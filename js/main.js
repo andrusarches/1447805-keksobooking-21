@@ -25,7 +25,6 @@
     window.load(window.map.renderAdPins, errorHandler);
     window.map.enableMapFilters();
     window.newAdForm.enableNewAdForm();
-    window.newAdForm.fillOutAddressActive();
     window.newAdForm.matchRoomNumberWithCapacity();
   };
 
@@ -45,11 +44,16 @@
     if (evt.keyCode === 13 && window.map.mapElement.classList.contains('map--faded')) {
       activatePage();
       window.removeEventListener('keydown', onPressEnterActivate);
-      window.map.mainMapPin.removeEventListener('mousedown', onClickMainPinActivate);
+      window.map.mainMapPin.removeEventListener('mousedown', function(evt) {
+        onClickMainPinActivate();
+      });
     }
   };
 
-  window.map.mainMapPin.addEventListener('mousedown', onClickMainPinActivate);
+  window.map.mainMapPin.addEventListener('mousedown', function(evt) {
+    onClickMainPinActivate(evt);
+    window.pin.onMouseDownPin(evt);
+  });
 
   window.addEventListener('keydown', onPressEnterActivate);
 })();
