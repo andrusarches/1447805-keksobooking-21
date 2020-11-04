@@ -1,9 +1,12 @@
 'use strict';
 
 (function () {
+  var PIN_WIDTH = 62;
+  var PIN_HEIGHT = 82;
+
   var introduceActivePinPosition = function () {
-    var mainMapPinActiveXPosition = parseInt(window.map.mainMapPin.style.left, 10) + 31;
-    var mainMapPinActiveYPosition = parseInt(window.map.mainMapPin.style.top, 10) + 82;
+    var mainMapPinActiveXPosition = parseInt(window.map.mainMapPin.style.left, 10) + PIN_WIDTH / 2;
+    var mainMapPinActiveYPosition = parseInt(window.map.mainMapPin.style.top, 10) + PIN_HEIGHT;
 
     window.newAdForm.newAddressField.value = mainMapPinActiveXPosition + ', ' + mainMapPinActiveYPosition;
   };
@@ -17,8 +20,6 @@
       min: 130,
       max: 630
     };
-    var PIN_WIDTH = 50;
-    var PIN_HEIGHT = 70;
 
     evt.preventDefault();
 
@@ -82,5 +83,5 @@
 
   window.pin = {
     onMouseDownPin: onMouseDownPin
-  }
+  };
 })();

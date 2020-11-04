@@ -44,13 +44,13 @@
     if (evt.keyCode === 13 && window.map.mapElement.classList.contains('map--faded')) {
       activatePage();
       window.removeEventListener('keydown', onPressEnterActivate);
-      window.map.mainMapPin.removeEventListener('mousedown', function(evt) {
+      window.map.mainMapPin.removeEventListener('mousedown', function () {
         onClickMainPinActivate();
       });
     }
   };
 
-  window.map.mainMapPin.addEventListener('mousedown', function(evt) {
+  window.map.mainMapPin.addEventListener('mousedown', function (evt) {
     onClickMainPinActivate(evt);
     window.pin.onMouseDownPin(evt);
   });
