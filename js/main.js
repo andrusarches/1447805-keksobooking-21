@@ -16,8 +16,12 @@
     window.map.fadeMap();
     window.map.disableMapFilters();
     window.newAdForm.disableNewAdForm();
+    window.adFilter.resetAdFilter();
+    window.newAdForm.resetNewAdForm();
     window.newAdForm.fillOutAddressInactive();
-    window.newAdForm.lockNewAddressField();
+    window.card.removeAdCard();
+    window.map.removeRenderedAdPins();
+    window.addEventListener('keydown', onPressEnterActivate);
   };
 
   var activatePage = function () {
@@ -25,7 +29,9 @@
     window.load(window.map.renderAdPins, errorHandler);
     window.map.enableMapFilters();
     window.newAdForm.enableNewAdForm();
+    window.pin.introduceActivePinPosition();
     window.newAdForm.matchRoomNumberWithCapacity();
+    window.newAdForm.resetFormButton.addEventListener('click', window.newAdForm.onClickResetForm);
   };
 
   deactivatePage();
@@ -56,4 +62,8 @@
   });
 
   window.addEventListener('keydown', onPressEnterActivate);
+
+  window.main = {
+    deactivatePage
+  };
 })();

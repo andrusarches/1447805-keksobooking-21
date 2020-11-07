@@ -52,13 +52,21 @@
     mapPins.appendChild(fragment);
   };
 
+  var removeRenderedAdPins = function () {
+    var renderedAdPins = mapPins.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (var i = 0; i < renderedAdPins.length; i++) {
+      renderedAdPins[i].remove();
+    }
+  };
+
   window.map = {
-    mapElement: mapElement,
-    mainMapPin: mainMapPin,
-    fadeMap: fadeMap,
-    showMap: showMap,
-    disableMapFilters: disableMapFilters,
-    enableMapFilters: enableMapFilters,
-    renderAdPins: renderAdPins
+    mapElement,
+    mainMapPin,
+    fadeMap,
+    showMap,
+    disableMapFilters,
+    enableMapFilters,
+    renderAdPins,
+    removeRenderedAdPins
   };
 })();

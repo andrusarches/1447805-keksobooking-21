@@ -82,6 +82,7 @@
   };
 
   window.pin = {
-    onMouseDownPin: onMouseDownPin
+    onMouseDownPin,
+    introduceActivePinPosition
   };
 })();
