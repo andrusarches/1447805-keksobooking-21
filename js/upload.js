@@ -3,7 +3,7 @@
 (function uploadFormData() {
   var UPLOAD_URL = 'https://21.javascript.pages.academy/keksobooking';
   var statusCode = {
-    ok: 200
+    ok: 300
   };
   var mainElement = document.querySelector('main');
 
@@ -54,7 +54,6 @@
       if (evt.keyCode === 27) {
         errorMessageButton.removeEventListener('click', onClickErrorMessageButton);
         errorMessage.remove();
-        window.main.deactivatePage();
         window.removeEventListener('click', onClickRemoveErrorMessage);
         document.removeEventListener('keydown', onEscRemoveErrorMessage);
       }
@@ -64,7 +63,6 @@
       evt.preventDefault();
       errorMessageButton.removeEventListener('click', onClickErrorMessageButton);
       errorMessage.remove();
-      window.main.deactivatePage();
       document.removeEventListener('keydown', onEscRemoveErrorMessage);
       window.removeEventListener('click', onClickRemoveErrorMessage);
     };
@@ -74,7 +72,6 @@
       evt.preventDefault();
       errorMessageButton.removeEventListener('click', onClickErrorMessageButton);
       errorMessage.remove();
-      window.main.deactivatePage();
       document.removeEventListener('keydown', onEscRemoveErrorMessage);
       window.removeEventListener('click', onClickRemoveErrorMessage);
     };
