@@ -10,17 +10,11 @@
   var newCheckOutField = newAdForm.querySelector('#timeout');
   var newRoomNumberField = newAdForm.querySelector('#room_number');
   var newCapacityField = newAdForm.querySelector('#capacity');
-  var mainMapPinInactiveXPosition = parseInt(window.map.mainMapPin.style.left, 10) + 32;
-  var mainMapPinInactiveYPosition = parseInt(window.map.mainMapPin.style.top, 10) + 32;
-  var mainMapPinActiveXPosition = parseInt(window.map.mainMapPin.style.left, 10) + 32;
-  var mainMapPinActiveYPosition = parseInt(window.map.mainMapPin.style.top, 10) + 65;
+  var mainMapPinInactiveXPosition = parseInt(window.map.mainMapPin.style.left, 10) + 31;
+  var mainMapPinInactiveYPosition = parseInt(window.map.mainMapPin.style.top, 10) + 31;
 
   var fillOutAddressInactive = function () {
     newAddressField.value = mainMapPinInactiveXPosition + ', ' + mainMapPinInactiveYPosition;
-  };
-
-  var fillOutAddressActive = function () {
-    newAddressField.value = mainMapPinActiveXPosition + ', ' + mainMapPinActiveYPosition;
   };
 
   var disableNewAdForm = function () {
@@ -109,10 +103,10 @@
 
   window.newAdForm = {
     fillOutAddressInactive: fillOutAddressInactive,
-    fillOutAddressActive: fillOutAddressActive,
     lockNewAddressField: lockNewAddressField,
     disableNewAdForm: disableNewAdForm,
     enableNewAdForm: enableNewAdForm,
-    matchRoomNumberWithCapacity: matchRoomNumberWithCapacity
+    matchRoomNumberWithCapacity: matchRoomNumberWithCapacity,
+    newAddressField: newAddressField
   };
 })();
