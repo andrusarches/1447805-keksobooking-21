@@ -135,6 +135,7 @@
   };
 
   window.card = {
-    showAdCard: showAdCard
+    showAdCard,
+    removeAdCard
   };
 })();

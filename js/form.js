@@ -31,10 +31,6 @@
     newAdForm.classList.remove('ad-form--disabled');
   };
 
-  var lockNewAddressField = function () {
-    newAddressField.disabled = true;
-  };
-
   var matchPriceRangeWithHousingType = function () {
     if (newHousingTypeField.value === 'bungalow') {
       newPriceField.min = 0;
@@ -81,6 +77,18 @@
     }
   };
 
+  var resetFormButton = newAdForm.querySelector('.ad-form__reset');
+
+  var resetNewAdForm = function () {
+    newAdForm.reset();
+  };
+
+  var onClickResetForm = function (evt) {
+    evt.preventDefault();
+    window.main.deactivatePage();
+    window.newAdForm.resetFormButton.removeEventListener('click', onClickResetForm);
+  };
+
   newAdForm.addEventListener('change', matchRoomNumberWithCapacity);
 
   var checkCheckInAndCheckOut = function () {
@@ -102,11 +110,14 @@
   newCheckInField.addEventListener('change', checkCheckInAndCheckOut);
 
   window.newAdForm = {
-    fillOutAddressInactive: fillOutAddressInactive,
-    lockNewAddressField: lockNewAddressField,
-    disableNewAdForm: disableNewAdForm,
-    enableNewAdForm: enableNewAdForm,
-    matchRoomNumberWithCapacity: matchRoomNumberWithCapacity,
-    newAddressField: newAddressField
+    fillOutAddressInactive,
+    disableNewAdForm,
+    enableNewAdForm,
+    matchRoomNumberWithCapacity,
+    newAddressField,
+    newAdForm,
+    resetNewAdForm,
+    resetFormButton,
+    onClickResetForm
   };
 })();
