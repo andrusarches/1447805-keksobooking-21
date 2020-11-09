@@ -7,7 +7,7 @@
   var filterPrice = adFilterForm.querySelector('#housing-price');
   var filterRooms = adFilterForm.querySelector('#housing-rooms');
   var filterGuests = adFilterForm.querySelector('#housing-guests');
-  var featuresFieldset = adFilterForm.querySelector('#housing-features');
+  // var featuresFieldset = adFilterForm.querySelector('#housing-features');
   // var features = featuresFieldset.querySelectorAll('input[type="checkbox"]');
 
   var MIN_PRICE_TRESHOLD = 10000;
