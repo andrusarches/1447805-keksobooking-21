@@ -72,7 +72,7 @@
       if (newCapacityField.value === '0') {
         newCapacityField.setCustomValidity('');
       } else {
-        newCapacityField.setCustomValidity('Дворец - не для гостей!');
+        newCapacityField.setCustomValidity('Не для гостей!');
       }
     }
   };

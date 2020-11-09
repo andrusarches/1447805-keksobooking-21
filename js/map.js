@@ -3,8 +3,9 @@
 (function () {
   var mapElement = document.querySelector('.map');
   var mainMapPin = mapElement.querySelector('.map__pin--main');
-  var mapFilters = mapElement.querySelectorAll('.map__filter, .map__features');
   var mapPins = document.querySelector('.map__pins');
+
+  var MAX_PIN_NUMBER = 5;
 
   var fadeMap = function () {
     mapElement.classList.add('map--faded');
@@ -14,42 +15,20 @@
     mapElement.classList.remove('map--faded');
   };
 
-  var disableMapFilters = function () {
-    for (var i = 0; i < mapFilters.length; i++) {
-      mapFilters[i].disabled = true;
-    }
-  };
-
-  var enableMapFilters = function () {
-    for (var i = 0; i < mapFilters.length; i++) {
-      mapFilters[i].disabled = false;
-    }
-  };
-
   var mapPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
 
-  var renderPin = function (arrayElement, arrayElementIndex) {
+  var renderPin = function (arrayElement) {
     var mapPin = mapPinTemplate.cloneNode(true);
 
     mapPin.style = "left: " + arrayElement.location.x + "px; top: " + arrayElement.location.y + "px;";
     mapPin.querySelector('img').src = arrayElement.author.avatar;
     mapPin.querySelector('img').alt = arrayElement.offer.title;
     mapPin.addEventListener('click', function () {
-      window.card.showAdCard(window.load.data[arrayElementIndex]);
+      window.card.showAdCard(arrayElement);
     });
     return mapPin;
-  };
-
-  var renderAdPins = function (adData) {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < adData.length; i++) {
-      if (adData[i].offer.length !== 0) {
-        fragment.appendChild(renderPin(adData[i], i));
-      }
-    }
-    mapPins.appendChild(fragment);
   };
 
   var removeRenderedAdPins = function () {
@@ -59,13 +38,28 @@
     }
   };
 
+  var renderAdPins = function (adData) {
+    window.card.removeAdCard();
+    removeRenderedAdPins();
+    var filteredAdData = [];
+    filteredAdData = adData.filter(function (el) {
+      return window.adFilter.filterAdData(el);
+    });
+    var slicedFilteredAdData = filteredAdData.slice(0, MAX_PIN_NUMBER);
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < slicedFilteredAdData.length; i++) {
+      if (slicedFilteredAdData [i].offer.length !== 0) {
+        fragment.appendChild(renderPin(slicedFilteredAdData[i]));
+      }
+    }
+    mapPins.appendChild(fragment);
+  };
+
   window.map = {
     mapElement,
     mainMapPin,
     fadeMap,
     showMap,
-    disableMapFilters,
-    enableMapFilters,
     renderAdPins,
     removeRenderedAdPins
   };

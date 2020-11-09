@@ -16,6 +16,13 @@
     var adPhotos = adCard.querySelector('.popup__photos');
     var adAvatar = adCard.querySelector('.popup__avatar');
 
+    var housingTypeMap = {
+      flat: 'Квартира',
+      bungalow: 'Бунгало',
+      house: 'Дом',
+      palace: 'Дворец'
+    };
+
     if (arrayElement.offer.title.length !== 0) {
       adTitle.textContent = arrayElement.offer.title;
     } else {
@@ -29,20 +36,7 @@
     }
 
     if (arrayElement.offer.type.length !== 0) {
-      switch (arrayElement.offer.type) {
-        case 'flat':
-          adHousingType.textContent = 'Квартира';
-          break;
-        case 'bungalow':
-          adHousingType.textContent = 'Бунгало';
-          break;
-        case 'house':
-          adHousingType.textContent = 'Дом';
-          break;
-        case 'palace':
-          adHousingType.textContent = 'Дворец';
-          break;
-      }
+      adHousingType.textContent = housingTypeMap[arrayElement.offer.type];
     } else {
       adHousingType.classList.add('hidden');
     }

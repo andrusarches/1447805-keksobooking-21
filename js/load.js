@@ -15,6 +15,7 @@
         case 200:
           onSuccess(xhr.response);
           window.load.data = xhr.response;
+          window.adFilter.enableAdFilterForm();
           break;
         case 400:
           error = 'Неверный запрос';
