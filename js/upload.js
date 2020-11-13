@@ -6,6 +6,7 @@
     ok: 300
   };
   var mainElement = document.querySelector('main');
+  var ESC_KEY_CODE = 27;
 
   var showSuccessMessage = function () {
     var successMessageTemplate = document.querySelector('#success')
@@ -27,7 +28,7 @@
 
     var onEscRemoveSuccessMessage = function (evt) {
       evt.preventDefault();
-      if (evt.keyCode === 27) {
+      if (evt.keyCode === ESC_KEY_CODE) {
         successMessage.remove();
         window.main.deactivatePage();
         window.removeEventListener('click', onClickRemoveSuccessMessage);
@@ -51,7 +52,7 @@
 
     var onEscRemoveErrorMessage = function (evt) {
       evt.preventDefault();
-      if (evt.keyCode === 27) {
+      if (evt.keyCode === ESC_KEY_CODE) {
         errorMessageButton.removeEventListener('click', onClickErrorMessageButton);
         errorMessage.remove();
         window.removeEventListener('click', onClickRemoveErrorMessage);

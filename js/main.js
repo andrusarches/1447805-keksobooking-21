@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var ENTER_KEY_CODE = 13;
+
   var errorHandler = function (errorMessage) {
     var newErrorElement = document.createElement('div');
     newErrorElement.style = 'color: #fff; z-index: 100; margin: 0 auto; padding: 5px 0; top: 0; text-align: center; background-color: tomato; box-shadow: 0 0 5px 5px tomato;';
@@ -21,7 +23,7 @@
     window.newAdForm.fillOutAddressInactive();
     window.card.removeAdCard();
     window.map.removeRenderedAdPins();
-    window.addEventListener('keydown', onPressEnterActivate);
+    window.addEventListener('keydown', onEnterActivateMap);
   };
 
   var activatePage = function () {
@@ -39,16 +41,16 @@
     evt.preventDefault();
     if (evt.button === 0 && window.map.mapElement.classList.contains('map--faded')) {
       activatePage();
-      window.removeEventListener('keydown', onPressEnterActivate);
+      window.removeEventListener('keydown', onEnterActivateMap);
       window.map.mainMapPin.removeEventListener('mousedown', onClickMainPinActivate);
     }
   };
 
-  var onPressEnterActivate = function (evt) {
+  var onEnterActivateMap = function (evt) {
     evt.preventDefault();
-    if (evt.keyCode === 13 && window.map.mapElement.classList.contains('map--faded')) {
+    if (evt.keyCode === ENTER_KEY_CODE && window.map.mapElement.classList.contains('map--faded')) {
       activatePage();
-      window.removeEventListener('keydown', onPressEnterActivate);
+      window.removeEventListener('keydown', onEnterActivateMap);
       window.map.mainMapPin.removeEventListener('mousedown', function () {
         onClickMainPinActivate();
       });
@@ -60,7 +62,7 @@
     window.pin.onMouseDownPin(evt);
   });
 
-  window.addEventListener('keydown', onPressEnterActivate);
+  window.addEventListener('keydown', onEnterActivateMap);
 
   window.main = {
     deactivatePage

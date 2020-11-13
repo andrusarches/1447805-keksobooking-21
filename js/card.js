@@ -1,6 +1,8 @@
 'use strict';
 
 (function generateAdCards() {
+  var ESC_KEY_CODE = 27;
+
   var createAdCard = function (arrayElement) {
     var adCardTemplate = document.querySelector('#card')
       .content
@@ -108,7 +110,7 @@
   };
 
   var onEscCard = function (evt) {
-    if (evt.keyCode === 27) {
+    if (evt.keyCode === ESC_KEY_CODE) {
       evt.preventDefault();
       removeAdCard();
     }

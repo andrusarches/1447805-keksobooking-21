@@ -10,8 +10,10 @@
   var newCheckOutField = newAdForm.querySelector('#timeout');
   var newRoomNumberField = newAdForm.querySelector('#room_number');
   var newCapacityField = newAdForm.querySelector('#capacity');
-  var mainMapPinInactiveXPosition = parseInt(window.map.mainMapPin.style.left, 10) + 31;
-  var mainMapPinInactiveYPosition = parseInt(window.map.mainMapPin.style.top, 10) + 31;
+  var INACTIVE_PIN_HEIGHT = 62;
+  var INACTIVE_PIN_WIDTH = 62;
+  var mainMapPinInactiveXPosition = parseInt(window.map.mainMapPin.style.left, 10) + INACTIVE_PIN_WIDTH / 2;
+  var mainMapPinInactiveYPosition = parseInt(window.map.mainMapPin.style.top, 10) + INACTIVE_PIN_HEIGHT / 2;
 
   var fillOutAddressInactive = function () {
     newAddressField.value = mainMapPinInactiveXPosition + ', ' + mainMapPinInactiveYPosition;
