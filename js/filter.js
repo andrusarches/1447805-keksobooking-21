@@ -32,7 +32,6 @@
       }
     }
 
-
     return ((filterType.value === 'any' || filterType.value === arrayElement.offer.type)
       && (filterPrice.value === 'any' || filterPrice.value === determinePriceRange(arrayElement.offer.price))
       && (filterRooms.value === 'any' || parseInt(filterRooms.value, 10) === arrayElement.offer.rooms)
