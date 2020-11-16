@@ -1,9 +1,5 @@
 'use strict';
 
-var UPLOAD_URL = 'https://21.javascript.pages.academy/keksobooking';
-var statusCode = {
-  ok: 300
-};
 var mainElement = document.querySelector('main');
 var ESC_KEY_CODE = 27;
 
@@ -76,30 +72,25 @@ var showErrorMessage = function () {
     window.removeEventListener('click', onClickRemoveErrorMessage);
   };
 
-
   document.addEventListener('keydown', onEscRemoveErrorMessage);
   window.addEventListener('click', onClickRemoveErrorMessage);
   errorMessageButton.addEventListener('click', onClickErrorMessageButton);
 };
 
 
-window.upload = function (data, onSuccess, onError) {
-  var xhr = new XMLHttpRequest();
-  xhr.responseType = 'json';
-  xhr.addEventListener('load', function () {
-    if (xhr.status === statusCode.ok) {
-      onSuccess();
-    } else {
-      onError();
-    }
-  });
-
-  xhr.open('POST', UPLOAD_URL);
-  xhr.send(data);
+var errorPopupHandler = function (errorMessage) {
+  var newErrorElement = document.createElement('div');
+  newErrorElement.style = 'color: #fff; z-index: 100; margin: 0 auto; padding: 5px 0; top: 0; text-align: center; background-color: tomato; box-shadow: 0 0 5px 5px tomato;';
+  newErrorElement.style.position = 'sticky';
+  newErrorElement.style.left = 0;
+  newErrorElement.style.right = 0;
+  newErrorElement.style.fontSize = '25px';
+  newErrorElement.textContent = '× ' + errorMessage + ' ×';
+  document.body.insertAdjacentElement('afterbegin', newErrorElement);
 };
 
-var submitHandler = function (evt) {
-  evt.preventDefault();
-  window.upload(new FormData(window.newAdForm.newAdForm), showSuccessMessage, showErrorMessage);
+window.templatesErrorSuccess = {
+  showSuccessMessage,
+  showErrorMessage,
+  errorPopupHandler
 };
-window.newAdForm.newAdForm.addEventListener('submit', submitHandler);

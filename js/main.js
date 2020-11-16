@@ -2,17 +2,6 @@
 
 var ENTER_KEY_CODE = 13;
 
-var errorHandler = function (errorMessage) {
-  var newErrorElement = document.createElement('div');
-  newErrorElement.style = 'color: #fff; z-index: 100; margin: 0 auto; padding: 5px 0; top: 0; text-align: center; background-color: tomato; box-shadow: 0 0 5px 5px tomato;';
-  newErrorElement.style.position = 'sticky';
-  newErrorElement.style.left = 0;
-  newErrorElement.style.right = 0;
-  newErrorElement.style.fontSize = '25px';
-  newErrorElement.textContent = '× ' + errorMessage + ' ×';
-  document.body.insertAdjacentElement('afterbegin', newErrorElement);
-};
-
 var deactivatePage = function () {
   window.map.fadeMap();
   window.adFilter.disableAdFilterForm();
@@ -27,10 +16,9 @@ var deactivatePage = function () {
 
 var activatePage = function () {
   window.map.showMap();
-  window.load(window.map.renderAdPins, errorHandler);
+  window.download(window.map.renderAdPins, window.templatesErrorSuccess.errorPopupHandler);
   window.newAdForm.enableNewAdForm();
   window.pin.introduceActivePinPosition();
-  window.newAdForm.matchRoomNumberWithCapacity();
   window.newAdForm.resetFormButton.addEventListener('click', window.newAdForm.onClickResetForm);
 };
 

@@ -5,9 +5,9 @@ var PIN_HEIGHT = 82;
 
 var introduceActivePinPosition = function () {
   var mainMapPinActiveXPosition = parseInt(window.map.mainMapPin.style.left, 10) + PIN_WIDTH / 2;
-  var mainMapPinActiveYPosition = parseInt(window.map.mainMapPin.style.top, 10) + PIN_HEIGHT;
+  var mainMapPinActiveYPosition = parseInt(window.map.mainMapPin.style.top, 10);
 
-  window.newAdForm.newAddressField.value = mainMapPinActiveXPosition + ', ' + mainMapPinActiveYPosition;
+  window.newAdForm.newAddressField.value = mainMapPinActiveXPosition + ', ' + (mainMapPinActiveYPosition + PIN_HEIGHT);
 };
 
 var onMouseDownPin = function (evt) {
@@ -16,8 +16,8 @@ var onMouseDownPin = function (evt) {
     max: 1168
   };
   var Y_POSITION_LIMITS = {
-    min: 130,
-    max: 630
+    min: (130 - PIN_HEIGHT),
+    max: (630 - PIN_HEIGHT)
   };
 
   evt.preventDefault();

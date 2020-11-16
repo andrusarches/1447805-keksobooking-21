@@ -5,13 +5,14 @@ module.exports = {
     "./js/util.js",
     "./js/debounce.js",
     "./js/filter.js",
-    "./js/load.js",
     "./js/map.js",
     "./js/card.js",
+    "./js/synchronize-fields.js",
     "./js/form.js",
+    "./js/templatesErrorSuccess.js",
+    "./js/backend.js",
     "./js/image-upload.js",
     "./js/pin.js",
-    "./js/upload.js",
     "./js/main.js"
   ],
   output: {

@@ -45,7 +45,7 @@ var disableAdFilterForm = function () {
 
 var enableAdFilterForm = function () {
   var executePinRendering = function () {
-    window.map.renderAdPins(window.load.data);
+    window.map.renderAdPins(window.download.data);
   };
 
   for (var k = 0; k < filterElements.length; k++) {
